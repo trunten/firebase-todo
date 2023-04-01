@@ -26,11 +26,9 @@ const collectionID = "todos"
 export default function App() {
   const [user, loading] = useAuthState(auth);
   return (
-    <div className="App">
-      <div className="App" style={{margin:"20px"}}>
+    <div className="App" style={{width:"100%", maxWidth:"1000px", margin:"0 auto", padding:"20px"}}>
       {!loading && <SignIn />}
       {!loading && user && <TodoList />}
-    </div>
     </div>
   );
 }
@@ -79,31 +77,31 @@ function TodoList() {
   }
 
   return (
-    <div>
-      <div style={flex}>
+    <main>
+      <div style={{...flex, justifyContent:"center", marginBlock:"30px"}}>
         <img src={photoURL} alt="" style={{width:"50px", borderRadius:"50%"}} />
-        <h1>Todos</h1>
+        <h1 style={{margin:"0"}}>Todos</h1>
       </div>
-      <form onSubmit={submit}>
+      <form onSubmit={submit} style={flex}>
         <input ref={todoText} type="text" required placeholder="I need to..." />
-        <button type="submit">Submit</button>
+        <button type="submit" style={{width:"200px"}}>Submit</button>
       </form>
-      <ul>
+      <ul style={{borderBottom:"1px solid grey", padding: 0}}>
         {
           todos && todos.map(todo => {
             return (
               todo.complete && hideComplete 
               ? "" 
-              : <div key={todo.id} style={flex}>
-                  <li style={todo.complete ? {color:"grey"} : {}}>{todo.text}</li>
-                  {!todo.complete && <button onClick={()=>completed(todo.id)}>Complete</button>}
-                  <button onClick={()=>deleteTodo(todo.id)}>Delete</button>
+              : <div key={todo.id} style={{...flex, paddingBlock: "20px", borderTop:"1px solid grey"}}>
+                  <li style={{...flex, width:"100%", color: todo.complete ? "grey": "inherit"}}>{todo.text}</li>
+                  {todo.complete ? <div style={{minWidth:"150px"}}></div> : <button onClick={()=>completed(todo.id)} style={{maxWidth:"150px",margin:0, backgroundColor:"green"}}>Complete</button>}
+                  <button onClick={()=>deleteTodo(todo.id)} style={{maxWidth:"150px", margin:0, backgroundColor:"red"}}>Delete</button>
                 </div>
             )
           })
         }
       </ul>
-      <button onClick={()=>setHideComplete(!hideComplete)}>{hideComplete ? "Show completed" : "Hide completed"}</button>
-    </div>
+      <button onClick={()=>setHideComplete(!hideComplete)} style={{width:"200px"}}>{hideComplete ? "Show completed" : "Hide completed"}</button>
+    </main>
   )
 }
