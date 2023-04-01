@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { getFirestore, collection, doc, addDoc, setDoc, deleteDoc, query, where, orderBy, serverTimestamp } from 'firebase/firestore';
 // import { getAnalytics, logEvent } from "firebase/analytics"; // for google analytics
 
