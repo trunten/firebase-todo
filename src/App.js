@@ -7,13 +7,12 @@ import { getFirestore, collection, doc, addDoc, setDoc, deleteDoc, query, where,
 // import { getAnalytics, logEvent } from "firebase/analytics"; // for google analytics
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA9KlAf-o1doYMxSygc36jYYluctUj0mck",
-  authDomain: "todo-de4d9.firebaseapp.com",
-  projectId: "todo-de4d9",
-  storageBucket: "todo-de4d9.appspot.com",
-  messagingSenderId: "590104396969",
-  appId: "1:590104396969:web:ba8dd76e00606e446995b8",
-  measurementId: "G-N1XZXJZJPJ"
+  apiKey: "AIzaSyDm3smI-RUY93wv-6cUgPjjAbYMtJrS-UA",
+  authDomain: "todo-b3cd1.firebaseapp.com",
+  projectId: "todo-b3cd1",
+  storageBucket: "todo-b3cd1.appspot.com",
+  messagingSenderId: "1058653293171",
+  appId: "1:1058653293171:web:d060c1c56a7b1f55ad3806"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -54,7 +53,8 @@ function TodoList() {
   const messagesCollection = collection(db, collectionID);
 
   const q = query(messagesCollection, where("uid", "==", uid), orderBy("createdAt"));
-  const [todos, loading] = useCollectionData(q, { idField: "id" });
+  const [todos, loading, error] = useCollectionData(q, { idField: "id" });
+  if (error) console.error(error);
   const todoText = useRef(0);
   const [hideComplete, setHideComplete] = useState(true);
   const flex = {display:"flex", alignItems:"center", gap:"10px"}
